@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { ReactNode, Dispatch, SetStateAction} from 'react'
 import { ITask } from '../interfaces/Task'
 
-interface Context {
-  task?: any,
+
+interface Children {
+  children: ReactNode
+}
+
+type sendTask = {
+  task?: ITask[] | [];
   setTask?: any
 }
 
-export const GlobalStore = React.createContext<Context>({});
+export const GlobalStore = React.createContext<sendTask>({});
 
-export const UserContext = ({children}: any) => {
+export const UserContext = ({children}: Children) => {
   
   const [task, setTask] = React.useState<ITask[]>([]);
-
+  
   return (
     <GlobalStore.Provider value={{
       task,
-      setTask
+      setTask,
     }}>
       {children}
     </GlobalStore.Provider>

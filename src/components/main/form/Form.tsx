@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext } from 'react'
+import React, { FormEvent, useContext, Dispatch, SetStateAction } from 'react'
 import Input from '../../tagComponents/input/Input'
 import Button from '../../tagComponents/button/Button'
 import useForm from '../../../hooks/useForm'
@@ -8,26 +8,31 @@ import { GlobalStore } from '../../../helper/store'
 
 import { ITask } from '../../../interfaces/Task'
 
+
 const Form = () => {
 
   const {task, setTask} = useContext(GlobalStore);
   const title = useForm('string');
   const difficulty = useForm('number');
 
-  function HandleSubmit(event: FormEvent):void {
+  function HandleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log(typeof title.content)
-
-    const newTask: ITask = {
-      id: task.length + 1,
-      title: title.content,
-      difficulty: Number(difficulty.content)
-    }
-
     if (task) {
+      const newTask: ITask = {
+        id: task.length + 1,
+        title: title.content,
+        difficulty: Number(difficulty.content)
+      }
+
       setTask([...task, newTask]);
+      
     } else {
+      const newTask: ITask = {
+        id: 1,
+        title: title.content,
+        difficulty: Number(difficulty.content)
+      }
       setTask(newTask)
     }
 
