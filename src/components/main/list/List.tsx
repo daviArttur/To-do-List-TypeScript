@@ -24,7 +24,7 @@ const List = (props: Props): any => {
     if (taskLocalStorage) {
       setTask!(JSON.parse(taskLocalStorage))
     }
-  }, [task, setTask])
+  }, [setTask])
 
   if (task) return task.map(({ id, title, difficulty }:ITask) => {
     return(
