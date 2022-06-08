@@ -1,22 +1,29 @@
 import React from 'react'
 
+// styles
+import styles from './Input.module.scss'
+
 type Props = {
-  id: string
+  name: string
   type: string
   placeholder?: string
   children: string
   onChange: any
+  value: string
 }
 
-const Input = ({placeholder, type, id, children, onChange}: Props) => {
+const Input = ({placeholder, type, name, children, onChange, value}: Props) => {
 
   return (
-    <div onChange={onChange}>
-      <label htmlFor={id}>{ children }</label>
+    <div className={styles.container}>
+      <label className={styles.label} htmlFor={name}>{ children }</label>
       <input 
-        id={id} 
+        id={name} 
         type={type} 
-        placeholder={placeholder} 
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        className={styles.input}
         />
     </div>
   )

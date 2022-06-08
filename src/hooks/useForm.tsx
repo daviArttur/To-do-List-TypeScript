@@ -4,21 +4,24 @@ type Props = 'string' | 'number';
 
 const useForm = (props: Props) => {
 
-  const [content, setContent] = React.useState<string | number>('Vazio');
-    
+  const [content, setContent] = React.useState<string>('');
+  const [value, setValue] = React.useState<string>('');
+  
   function onChange({target}: ChangeEvent<HTMLInputElement>) {
+    setValue(target.value);
+  }
 
-    if(props === 'number') {
-      console.log(props)
-      setContent(Number(target.value));
-    } else {
-      setContent(target.value);
-    }
+  function cleanValue() {
+    setValue('');
   }
   
   return {
     content,
-    onChange
+    onChange,
+    setContent,
+    value,
+    setValue,
+    cleanValue
   }  
 }
 

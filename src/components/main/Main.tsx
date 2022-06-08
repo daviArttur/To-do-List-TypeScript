@@ -7,12 +7,11 @@ import styles from './Main.module.scss'
 import Form from './form/Form'
 import List from './list/List'
 
-
 type Props = {}
 
 const Main = (props: Props) => {
   return (
-    <div>
+    <div className={styles.main}>
       <h2>O que você vai fazer?</h2>
       <Form />
 

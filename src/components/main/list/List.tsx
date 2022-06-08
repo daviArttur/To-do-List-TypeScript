@@ -4,19 +4,40 @@ import React from 'react'
 import { GlobalStore } from '../../../helper/store'
 
 // Interface
-import { ITask } from '../../../interfaces/Task'
+import { ITask } from '../../../interfaces/interfaces'
 
+// Styles
+import styles from './List.module.scss'
 
-const List = (): any => {
+// Components
+import Delete from './delete/Delete'
+import Edit from './edit/Edit'
 
-  const { task } = React.useContext(GlobalStore);
+type Props = {}
 
-  if (task) return task.map(({id, title, difficulty}:ITask) => {
+const List = (props: Props): any => {
+
+  const { task, setTask } = React.useContext(GlobalStore);
+
+  React.useEffect(() => {
+    const taskLocalStorage = window.localStorage.getItem('task');
+    if (taskLocalStorage) {
+      setTask!(JSON.parse(taskLocalStorage))
+    }
+  }, [task, setTask])
+
+  if (task) return task.map(({ id, title, difficulty }:ITask) => {
     return(
-      <div key={id}>
-        <p>{title}</p>
-        <p>Dificuldade: {difficulty}</p>
-        <p>{id}</p>
+      <div className={styles.container} key={id}>
+        <div className={styles.containerList} >
+          <h3>{title}</h3>
+          <p>{difficulty}</p>
+        </div>
+      
+        <div>
+          <Delete id={id}/>
+          <Edit id={id}/>
+        </div>
       </div>
     )
   })

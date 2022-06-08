@@ -1,0 +1,18 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: left;
+  margin: 1rem 0;
+}
+
+.input {
+  border: 1px solid black;
+  padding: 0.5rem 0.3rem;
+  width: 100%;
+}
+
+.label {
+  align-self: flex-start;
+  font-weight: bold;
+}
